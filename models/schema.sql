@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     task VARCHAR(255) NOT NULL,
     status ENUM('pending', 'completed') DEFAULT 'pending',
     due_date DATE NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (assigner_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
