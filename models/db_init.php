@@ -1,9 +1,13 @@
 <?php
-require_once 'env_loader.php';
+require 'vendor/autoload.php';
 
-function initializeDatabase() {
-    // Load environment variables
-    $env = loadEnv();
+
+
+function initializeDatabase()
+{
+    $dotenv = Dotenv\Dotenv::createImmutable('./');
+    $env=$dotenv->load();
+    
     $host = $env['DB_HOST'];
     $dbname = $env['DB_NAME'];
     $user = $env['DB_USER'];
@@ -19,7 +23,7 @@ function initializeDatabase() {
         $pdo->exec("USE `$dbname`");
 
         // Read and execute the SQL file
-        $sql = file_get_contents('./private/schema.sql');
+        $sql = file_get_contents('./models/schema.sql');
         $pdo->exec($sql);
 
         echo "Database and table created successfully.";

@@ -1,18 +1,15 @@
 <?php
-require_once 'private/encryption.php';
+require_once 'controllers/UserController.php';
 
-session_start();
+// Create an instance of UserController
+$userController = new UserController();
 
-
-if (isset($_COOKIE['user_data'])) {
-    $decrypted_user_id = decrypt_cookie($_COOKIE['user_data']);
-    
-    if ($decrypted_user_id) {
-        header('Location: tasks.php');
-        exit();
+if ($userController->checkLogin()) {
+    if ($_SERVER['REQUEST_URI'] == '/tasks') {
+        $userController->tasks();
     }
-}
 
-header('Location: login.php');
-exit();
+} else {
+    $userController->login();
+}
 ?>

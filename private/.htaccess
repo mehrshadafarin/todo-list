@@ -1,3 +1,0 @@
-# Deny all requests to files in the private directory
-Order Deny,Allow
-Deny from all

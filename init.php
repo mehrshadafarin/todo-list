@@ -1,5 +1,5 @@
 <?php
-require_once './private/db_init.php';
+require_once  './models/db_init.php';
 
 initializeDatabase();
 ?>
