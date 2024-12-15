@@ -8,9 +8,12 @@ class UserController
     public function checkLogin()
     {
         if (isset($_COOKIE['user_id'])) {
-            if (decrypt($_COOKIE['user_id'])) {
-                UserFactory::getInstance(userId: decrypt($_COOKIE['user_id']));
+            $user = UserFactory::getInstance(userId: decrypt($_COOKIE['user_id']));
+            if ($user->checkId()) {
+
                 return true;
+            } else {
+                setcookie('user_id', '', time() - 3600, '/'); // Clear cookie
             }
         }
         return false;
@@ -24,28 +27,19 @@ class UserController
             $password = $_POST['password'];
 
 
-            $user = new User($username, $password);
+            $user = UserFactory::getInstance($username, $password);
             $result = $user->login();
 
-            if ($result == 0) {
+            if ($result == 0 || $result == -1) {
                 $errorMessage = "Invalid credentials or user creation failed.";
-                header('Location: /');
                 include 'views/login.php';
                 exit();
+            } else {
+                setcookie('user_id', encrypt($user->getUserId()), time() + (86400 * 30), '/'); // Cookie valid for 30 days
+                header('Location: /tasks');
+                exit();
             }
-            if ($result == -1) {
-                if (!($user->create())) {
-                    $errorMessage = "Invalid credentials or user creation failed.";
-                    header('Location: /');
-                    include 'views/login.php';
-                    exit();
-                }
-            }
-            setcookie('user_id', encrypt($user->getUserId()), time() + (86400 * 30), '/'); // Cookie valid for 30 days
-            header('Location: /tasks');
-            exit();
         }
-        header('Location: /');
         include 'views/login.php';
         exit();
 
@@ -57,20 +51,17 @@ class UserController
     {
         setcookie('user_id', '', time() - 3600, '/'); // Clear cookie
         header('Location: /');
-        include 'views/login.php';
         exit();
     }
 
-    // Show tasks page for logged-in user
-    public function tasks()
+
+    public function deleteAccount()
     {
-
         $user = UserFactory::getInstance();
-        $tasks = $user->getUserTasks();
-
-
-
-        require_once 'views/tasks.php'; // Display the tasks page
+        $user->delete();
+        setcookie('user_id', '', time() - 3600, '/'); // Clear cookie
+        header('Location: /');
         exit();
     }
+
 }

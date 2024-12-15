@@ -1,5 +1,6 @@
 <?php
-require 'vendor/autoload.php';
+require_once 'loadEnv.php';
+
 
 class DatabaseConnection
 {
@@ -10,13 +11,10 @@ class DatabaseConnection
     private function __construct()
     {
         // Load environment variables
-        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-        $dotenv->load();
-
-        $host = getenv('DB_HOST');
-        $dbname = getenv('DB_NAME');
-        $user = getenv('DB_USER');
-        $pass = getenv('DB_PASS');
+        global $host;
+        global $dbname;
+        global $user;
+        global $pass;
 
         // Create a new database connection
         $this->connection = new mysqli($host, $user, $pass, $dbname);
@@ -52,10 +50,14 @@ class DatabaseConnection
     }
 
     // Prevent cloning of the singleton instance
-    private function __clone() {}
+    private function __clone()
+    {
+    }
 
     // Prevent unserialization of the singleton instance
-    public function __wakeup() {}
+    public function __wakeup()
+    {
+    }
 }
 
 // Factory for creating the database connection

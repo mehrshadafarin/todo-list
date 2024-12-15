@@ -11,6 +11,21 @@ class UserManager
         $this->conn = DatabaseFactory::createConnection();
     }
 
+    public function checkUserId($userId)
+    {
+        $sql = "SELECT id FROM users WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Log in a user by verifying username and password.
      * @param string $username The username to log in.

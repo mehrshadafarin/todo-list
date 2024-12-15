@@ -15,7 +15,7 @@ class pairManager
         $this->taskManager = new TaskManager();
     }
 
-    private function createPair(int $userId, string $username)
+    public function createPair(int $userId, string $username)
     {
 
         $sql = "SELECT id FROM users WHERE username = ?";
@@ -48,7 +48,7 @@ class pairManager
      * @return bool Returns true if the deletion was successful, false otherwise.
      * If any error occurs during the transaction, the changes are rolled back.
      */
-    private function deletePair(int $pairId)
+    public function deletePair(int $pairId)
     {
         try {
             $this->conn->begin_transaction();
@@ -91,7 +91,7 @@ class pairManager
      * @param int $userId
      * @return array An array of pairs with 'id', 'user_id_1', 'user_id_2', 'username_1, username_2 for the given user.
      */
-    private function getPairs(int $userId)
+    public function getPairs(int $userId)
     {
 
         $sql = "SELECT user_pairs.id, user_pairs.user_id_1, user_pairs.user_id_2, u1.username AS username_1, u2.username AS username_2 FROM (SELECT * FROM user_pairs WHERE user_id_1 = ? OR user_id_2 = ?) AS user_pairs JOIN users AS u1 ON user_pairs.user_id_1 = u1.id JOIN users AS u2 ON user_pairs.user_id_2 = u2.id;";

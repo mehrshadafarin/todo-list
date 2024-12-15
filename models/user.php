@@ -27,13 +27,13 @@ class User extends UserManager
         $this->username = $username;
         $this->password = $password;
 
-        if ($userId) {
-
-        }
-
     }
 
-    private function getUserId()
+    public function checkId(){
+        return parent::checkUserId($this->userId);
+    }
+
+    public function getUserId()
     {
         return $this->userId;
     }
@@ -42,7 +42,7 @@ class User extends UserManager
      * Log in a user by verifying username and password.
      * @return int -1 if user does not exist, 0 if wrong password, 1 if successful login
      */
-    private function login()
+    public function login()
     {
         $result = parent::loginUser($this->username, $this->password);
         if ($result) {
@@ -62,7 +62,7 @@ class User extends UserManager
      * Create user using UserManager's createUser method
      * @return bool
      */
-    private function create()
+    public function create()
     {
         $result = parent::createUser($this->username, $this->password);
         if ($result['status']) {
@@ -76,7 +76,7 @@ class User extends UserManager
      * Delete user using UserManager's deleteUser method.
      * This also deletes associated tasks.
      */
-    private function delete()
+    public function delete()
     {
         return parent::deleteUser($this->userId);
     }
@@ -84,7 +84,7 @@ class User extends UserManager
     /**
      * Get tasks for a user using TaskManager's getUserTasks method
      */
-    private function getUserTasks()
+    public function getUserTasks()
     {
         return $this->taskManager->getUserTasks($this->userId);
     }
@@ -92,7 +92,7 @@ class User extends UserManager
     /**
      * Add a task for a user using TaskManager's createTask method
      */
-    private function createTask($taskName, $dueDate)
+    public function createTask($taskName, $dueDate)
     {
         return $this->taskManager->createTask($this->userId, $taskName, $dueDate);
     }
@@ -101,7 +101,7 @@ class User extends UserManager
     /**
      * Delete completed tasks for a user using TaskManager's deleteCompletedTasks method
      */
-    private function deleteCompletedTasks()
+    public function deleteCompletedTasks()
     {
         return $this->taskManager->deleteCompletedTasks($this->userId);
     }
@@ -128,30 +128,30 @@ class User extends UserManager
     }
 
 
-    private function assignTask($userId, $taskName, $dueDate)
+    public function assignTask($userId, $taskName, $dueDate)
     {
         return $this->taskManager->createTask($userId, $taskName, $dueDate, $this->userId);
     }
 
 
-    private function getAssignedTasks($userId)
+    public function getAssignedTasks($userId)
     {
         return $this->taskManager->getAssignedTasks($this->userId, $userId);
     }
 
-    private function createPair(string $username)
+    public function createPair(string $username)
     {
 
         return $this->pairManager->createPair($this->userId, $username);
 
     }
 
-    private function deletePair(int $pairId)
+    public function deletePair(int $pairId)
     {
         return $this->pairManager->deletePair($pairId);
     }
 
-    private function getPairs()
+    public function getPairs()
     {
 
         return $this->pairManager->getpairs($this->userId);
