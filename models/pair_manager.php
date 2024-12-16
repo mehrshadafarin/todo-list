@@ -89,7 +89,7 @@ class pairManager
     /**
      * get all pairs related to user
      * @param int $userId
-     * @return array An array of pairs with 'id', 'user_id_1', 'user_id_2', 'username_1, username_2 for the given user.
+     * @return array An array of pairs with 'id', 'user_id', username for the given user.
      */
     public function getPairs(int $userId)
     {
@@ -105,8 +105,13 @@ class pairManager
 
         $pairs = [];
         while ($row = $result->fetch_assoc()) {
-            $pairs[] = $row;
+            $pairs[] = array(
+                "id" => $row['id'],
+                "user_id" => ($row['user_id_1'] == $userId) ? $row['user_id_2'] : $row['user_id_1'],
+                "username" => ($row['user_id_1'] == $userId) ? $row['username_2'] : $row['username_1']
+            );
         }
+
 
         $stmt->close();
 

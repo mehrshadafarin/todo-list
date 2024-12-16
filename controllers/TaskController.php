@@ -47,7 +47,6 @@ class TaskController
     private function showTasks()
     {
         $user = UserFactory::getInstance();
-        $userId = $user->getUserId();
         $tasks = $user->getUserTasks();
         $pairs = $user->getPairs();
         require_once 'views/tasks.php';
