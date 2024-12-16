@@ -10,6 +10,13 @@
 </head>
 
 <body>
+    <form class="item" action="/logout" method="post">
+        <button class="btn" type="submit">logout</button>
+    </form>
+    <form class="item" action="/delete" method="post">
+        <button class="btn" type="submit">delete account</button>
+    </form>
+
 
     <div class="box">
         <form class="item" action="/tasks" method="post">
