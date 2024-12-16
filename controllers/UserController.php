@@ -30,9 +30,14 @@ class UserController
             $user = UserFactory::getInstance($username, $password);
             $result = $user->login();
 
-            if ($result == 0 || $result == -1) {
+            if ($result == 0) {
                 $errorMessage = "Invalid credentials or user creation failed.";
                 include 'views/login.php';
+                exit();
+            } else if ($result == -1) {
+                $user->create();
+                setcookie('user_id', encrypt($user->getUserId()), time() + (86400 * 30), '/'); // Cookie valid for 30 days
+                header('Location: /tasks');
                 exit();
             } else {
                 setcookie('user_id', encrypt($user->getUserId()), time() + (86400 * 30), '/'); // Cookie valid for 30 days

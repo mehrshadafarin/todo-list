@@ -30,12 +30,6 @@ if ($result) {
         case '/pair':
             $pairController->pairTasks();
             break;
-        case '/pair/add':
-            $pairController->addPair();
-            break;
-        case '/pair/delete':
-            $pairController->deletePair();
-            break;
         default:
             break;
     }

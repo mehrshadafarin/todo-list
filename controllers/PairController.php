@@ -7,7 +7,7 @@ class PairController
     public function addPair()
     {
         $user = UserFactory::getInstance();
-        $userName = $_POST['user_name'];
+        $userName = $_POST['username'];
         $user->createPair($userName);
         header('Location: /tasks');
         exit();
@@ -49,6 +49,12 @@ class PairController
                     $taskId = $_POST['task_id'];
                     $user->deleteTask($taskId);
                     break;
+                case 'add_pair':
+                    $this->addPair();
+                    break;
+                case 'delete_pair':
+                    $this->deletePair();
+                    break;
                 default:
                     break;
             }
@@ -62,9 +68,8 @@ class PairController
     private function showPairTasks()
     {
         $pairUserId = $_POST['pair_user_id'];
-        $pairUserName = $_POST['pair_user_name'];
-        $pairId = $_POST['pair_id'];
-
+        $pairUserName = $_POST['pair_username'];
+        
         $user = UserFactory::getInstance();
         $tasks = $user->getAssignedTasks($pairUserId);
         require_once 'views/pairTasks.php';

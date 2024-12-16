@@ -1,0 +1,111 @@
+/* General box styling */
+.box, .pairs_box {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+/* Styling for each item */
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Task input field styling */
+input[type="text"], input[type="string"], input[type="date"], input[type="button"] {
+  padding: 8px;
+  margin-right: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Styling for due date input */
+.due_date {
+  width: 150px;
+}
+
+/* Button styling */
+button.btn, input[type="button"] {
+  padding: 8px 15px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.btn:hover, input[type="button"]:hover {
+  background-color: #45a049;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Add pair section */
+h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.pairs_box input[type="submit"], .pairs_box input[type="button"] {
+  margin-right: 10px;
+}
+
+/* Task status styling */
+input[name="status"] {
+  background-color: #ff9800;
+  color: white;
+  cursor: pointer;
+}
+
+input[name="status"]:hover {
+  background-color: #fb8c00;
+}
+
+/* Styling for the task assigner name */
+.item p {
+  font-size: 14px;
+  color: #888;
+  margin-left: auto;
+}
+
+/* Form styling for the new task and new pair */
+form.item input[type="text"], form.pairs_box input[type="text"] {
+  width: 60%;
+  margin-right: 10px;
+}
+
+form.item input[type="text"]:focus, form.pairs_box input[type="text"]:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+/* General layout adjustments */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
+}
+
+h3 {
+  margin-bottom: 10px;
+}
+
+/* Style for the "add a new pair" form */
+form[action="/pair"] {
+  margin-top: 20px;
+}

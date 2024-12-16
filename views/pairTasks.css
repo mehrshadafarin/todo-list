@@ -1,0 +1,148 @@
+/* General body and layout styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Header styling */
+h1 {
+    font-size: 2.5em;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* Box container for the task list */
+.box {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+/* Styling for each task item */
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Input fields for task name and due date */
+input[type="text"], input[type="string"], input[type="date"], input[type="button"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 150px;
+}
+
+/* Due date input field */
+.due_date {
+    width: 180px;
+}
+
+/* Button styling */
+button.btn, input[type="button"] {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.btn:hover, input[type="button"]:hover {
+    background-color: #45a049;
+}
+
+/* Task status (disabled) styling */
+input[type="button"]:disabled {
+    background-color: #f0f0f0;
+    color: #888;
+    border: 1px solid #ddd;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Styling for task assigner name */
+.item p {
+    font-size: 14px;
+    color: #888;
+    margin-left: auto;
+}
+
+/* Styling for the add task form */
+form.item input[type="text"], form.item input[type="string"] {
+    width: 60%;
+}
+
+/* Form focus styles */
+input[type="text"]:focus, input[type="string"]:focus, input[type="date"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Add a new task form styles */
+form.item {
+    margin-bottom: 20px;
+}
+
+/* Task input field styling in the add task form */
+form.item input[type="text"], form.item input[type="string"] {
+    width: 60%;
+    margin-right: 10px;
+}
+
+/* Styling for the new task button */
+button.btn {
+    padding: 8px 15px;
+    background-color: #2196F3;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.btn:hover {
+    background-color: #1e88e5;
+}
+
+/* Adjustments for mobile screens */
+@media (max-width: 768px) {
+    .box {
+        width: 90%;
+    }
+
+    .item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    input[type="text"], input[type="string"], input[type="date"], input[type="button"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .item p {
+        margin-top: 10px;
+    }
+
+    button.btn {
+        width: 100%;
+    }
+}
