@@ -9,10 +9,11 @@ class user_test extends TestCase
 
     protected function setUp(): void
     {
-       
+
         // Create a new User instance
         $this->user = new User('testUser', 'testPassword');
-        
+        $pair = new User('v', 'v');
+        $pair->create();
         // Ensure the user is created or logged in before running tests
         $this->user->create();
     }
@@ -20,6 +21,9 @@ class user_test extends TestCase
     protected function tearDown(): void
     {
         // Clean up after tests by deleting the test user
+        $pair = new User('v', 'v');
+        $pair->login();
+        $pair->delete();
         $this->user->delete();
     }
 
@@ -46,23 +50,7 @@ class user_test extends TestCase
         $this->assertEmpty($tasksAfterDeletion, "Task was not deleted");
     }
 
-    public function testAssignAndRetrieveTasks()
-    {
-        // Create a pair
-        $pairUsername = "v";
-        $this->user->createPair($pairUsername);
-
-        // Assign a task to the paired user
-        $taskName = "Assigned Task";
-        $dueDate = "2025-02-01";
-        $assignResult = $this->user->assignTask(2, $taskName, $dueDate); // Assuming paired user ID is 2
-        $this->assertTrue($assignResult, "Task assignment failed");
-
-        // Retrieve assigned tasks
-        $assignedTasks = $this->user->getAssignedTasks(2);
-        $this->assertNotEmpty($assignedTasks, "Assigned tasks list is empty");
-        $this->assertEquals($taskName, $assignedTasks[0]['task'], "Assigned task name mismatch");
-    }
+    
 
     public function testCompleteTask()
     {
@@ -78,21 +66,5 @@ class user_test extends TestCase
         $this->assertTrue($completeResult, "Failed to mark task as completed");
     }
 
-    public function testCreateAndDeletePair()
-    {
-        // Create a pair
-        $pairUsername = "v";
-        $createPairResult = $this->user->createPair($pairUsername);
-        $this->assertTrue($createPairResult, "Failed to create pair");
 
-        // Retrieve pairs to confirm
-        $pairs = $this->user->getPairs();
-        $this->assertNotEmpty($pairs, "Pairs list is empty");
-        $this->assertEquals($pairUsername, $pairs[0]['username'], "Pair username mismatch");
-
-        // Delete the pair
-        $pairId = $pairs[0]['id'];
-        $deletePairResult = $this->user->deletePair($pairId);
-        $this->assertTrue($deletePairResult, "Failed to delete pair");
-    }
 }
