@@ -34,7 +34,7 @@ class user_test extends TestCase
         // Retrieve tasks to ensure it was created
         $tasks = $this->user->getUserTasks();
         $this->assertNotEmpty($tasks, "Task list is empty");
-        $this->assertEquals($taskName, $tasks[0]['name'], "Task name mismatch");
+        $this->assertEquals($taskName, $tasks[0]['task'], "Task name mismatch");
 
         // Delete the task
         $taskId = $tasks[0]['id'];
@@ -49,7 +49,7 @@ class user_test extends TestCase
     public function testAssignAndRetrieveTasks()
     {
         // Create a pair
-        $pairUsername = "pairUser";
+        $pairUsername = "v";
         $this->user->createPair($pairUsername);
 
         // Assign a task to the paired user
@@ -61,7 +61,7 @@ class user_test extends TestCase
         // Retrieve assigned tasks
         $assignedTasks = $this->user->getAssignedTasks(2);
         $this->assertNotEmpty($assignedTasks, "Assigned tasks list is empty");
-        $this->assertEquals($taskName, $assignedTasks[0]['name'], "Assigned task name mismatch");
+        $this->assertEquals($taskName, $assignedTasks[0]['task'], "Assigned task name mismatch");
     }
 
     public function testCompleteTask()
@@ -81,7 +81,7 @@ class user_test extends TestCase
     public function testCreateAndDeletePair()
     {
         // Create a pair
-        $pairUsername = "newPairUser";
+        $pairUsername = "v";
         $createPairResult = $this->user->createPair($pairUsername);
         $this->assertTrue($createPairResult, "Failed to create pair");
 
