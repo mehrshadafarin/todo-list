@@ -2,8 +2,7 @@
 require __DIR__.'/../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
 $dotenv->load();
-
-define('ENCRYPTION_KEY', $_ENV('ENCRYPTION_KEY'));
+define('ENCRYPTION_KEY', $_ENV['ENCRYPTION_KEY']);
 define('CIPHER_METHOD', 'AES-256-ECB'); // AES-256 with ECB mode (no IV needed)
 
 /**
