@@ -1,5 +1,5 @@
 <?php
-require_once 'loadEnv.php';
+
 
 
 class DatabaseConnection
@@ -10,15 +10,12 @@ class DatabaseConnection
     // Private constructor to prevent direct instantiation
     private function __construct()
     {
-        // Load environment variables
-        global $host;
-        global $dbname;
-        global $user;
-        global $pass;
-        // $host="localhost";
-        // $dbname="todo_list";
-        // $user="root";
-        // $pass="mysql";
+        $env = require_once 'loadEnv.php';
+        $host = $env['host'];
+        $dbname = $env['dbname'];
+        $user = $env['user'];
+        $pass = $env['pass'];
+
 
         // Create a new database connection
         $this->connection = new mysqli($host, $user, $pass, $dbname);

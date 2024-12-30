@@ -1,5 +1,5 @@
 <?php
-require_once 'db_connect.php';
+require_once __DIR__.'/../config/db_connect.php';
 require_once 'task_manager.php';
 require_once 'user_manager.php';
 require_once 'pair_manager.php';

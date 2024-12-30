@@ -1,6 +1,6 @@
 <?php
-require 'vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createImmutable('./');
+require __DIR__.'/../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
 $dotenv->load();
 
 define('ENCRYPTION_KEY', getenv('ENCRYPTION_KEY'));
